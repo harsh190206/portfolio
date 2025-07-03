@@ -43,6 +43,252 @@ export default function Portfolio() {
     setIsMenuOpen(false)
   }
 
+  const generateResume = () => {
+    // Portfolio data extraction
+    const portfolioData = {
+      personalInfo: {
+        name: "Harsh Kumar",
+        title: "CEO & Founder of NearBux | Computer Science Student",
+        email: "iharshkr1@gmail.com",
+        phone: "+91-7654454660",
+        location: "Jodhpur, Rajasthan",
+        linkedin: "linkedin.com/in/harsh-kumar-a7894128b",
+      },
+      summary:
+        "A dedicated and motivated student with a strong focus on maintaining a creative mindset while striving to achieve our goals and enhance my skills and knowledge. Passionate about innovation, technology, and entrepreneurship.",
+      experience: [
+        {
+          title: "CEO & Founder",
+          company: "NearBux",
+          period: "Present",
+          description:
+            "Transforming Indian local shops into digital businesses while rewarding customers for every purchase. Building the future of local commerce in India.",
+        },
+      ],
+      projects: [
+        {
+          name: "NearBux",
+          description:
+            "Transforming Indian local shops into digital businesses while rewarding customers for every purchase",
+          technologies: ["Entrepreneurship", "Digital Marketing", "Business Strategy"],
+        },
+        {
+          name: "Billing and Inventory Management System",
+          description:
+            "A complete software platform supporting Admins, Overseers, and Sellers to manage daily business operations efficiently",
+          technologies: ["Java", "Database Management", "UI/UX Design"],
+        },
+      ],
+      education: [
+        {
+          degree: "B.Tech in Computer Science",
+          institution: "Jodhpur Institute of Engineering and Technology",
+          status: "Pursuing",
+        },
+        {
+          degree: "12th Grade",
+          institution: "Bihar School Examination Board",
+          status: "Completed",
+        },
+        {
+          degree: "10th Grade",
+          institution: "Central Board of Secondary Education (CBSE)",
+          status: "Completed",
+        },
+      ],
+      skills: {
+        programming: ["Java", "JavaScript", "Python", "HTML", "CSS", "SQL"],
+        frameworks: ["Node.js", "React.js", "Flutter", "WordPress", "Figma", "Android Studio"],
+        languages: ["English", "Hindi", "Maithili"],
+        additional: ["Web Development", "UI/UX Design", "Android Development"],
+      },
+      certifications: [
+        { name: "Programming in Java", year: "2024" },
+        { name: "Cybersecurity Essentials", year: "2023" },
+        { name: "Virtual Internship in Cybersecurity", year: "2027" },
+        { name: "Reckon 5.0", year: "2021" },
+      ],
+      achievements: [
+        {
+          title: "Top 6 Finalist in LaunchPad Challenge 2024",
+          description:
+            "Team NearBux achieved Top 6 at the prestigious LaunchPad Challenge 2024 hosted by JESC (JIET Entrepreneurship and Start-Up Cell), held at iStart Rajasthan Nest, Jodhpur.",
+        },
+      ],
+    }
+
+    // Generate HTML for PDF
+    const resumeHTML = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Harsh Kumar - Resume</title>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+          .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #2563eb; padding-bottom: 20px; }
+          .header h1 { font-size: 2.5em; color: #2563eb; margin-bottom: 10px; }
+          .header p { font-size: 1.2em; color: #666; margin-bottom: 5px; }
+          .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 15px; }
+          .contact-item { font-size: 0.9em; color: #555; }
+          .section { margin-bottom: 25px; }
+          .section h2 { font-size: 1.5em; color: #2563eb; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 15px; }
+          .summary { font-style: italic; color: #555; margin-bottom: 20px; }
+          .experience-item, .project-item, .education-item { margin-bottom: 15px; }
+          .experience-item h3, .project-item h3, .education-item h3 { color: #333; margin-bottom: 5px; }
+          .company, .institution { color: #2563eb; font-weight: bold; }
+          .period { color: #666; font-style: italic; }
+          .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+          .skill-category h4 { color: #2563eb; margin-bottom: 8px; }
+          .skill-list { display: flex; flex-wrap: wrap; gap: 5px; }
+          .skill-tag { background: #f3f4f6; padding: 3px 8px; border-radius: 12px; font-size: 0.8em; color: #374151; }
+          .achievement { background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b; }
+          .achievement h4 { color: #92400e; margin-bottom: 8px; }
+          .certifications { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+          .cert-item { background: #f9fafb; padding: 10px; border-radius: 6px; text-align: center; }
+          @media print { body { padding: 10px; } .header h1 { font-size: 2em; } }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>${portfolioData.personalInfo.name}</h1>
+          <p>${portfolioData.personalInfo.title}</p>
+          <div class="contact-info">
+            <span class="contact-item">📧 ${portfolioData.personalInfo.email}</span>
+            <span class="contact-item">📱 ${portfolioData.personalInfo.phone}</span>
+            <span class="contact-item">📍 ${portfolioData.personalInfo.location}</span>
+            <span class="contact-item">💼 ${portfolioData.personalInfo.linkedin}</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Professional Summary</h2>
+          <p class="summary">${portfolioData.summary}</p>
+        </div>
+
+        <div class="section">
+          <h2>Professional Experience</h2>
+          ${portfolioData.experience
+            .map(
+              (exp) => `
+            <div class="experience-item">
+              <h3>${exp.title} at <span class="company">${exp.company}</span></h3>
+              <p class="period">${exp.period}</p>
+              <p>${exp.description}</p>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+
+        <div class="section">
+          <h2>Key Projects</h2>
+          ${portfolioData.projects
+            .map(
+              (project) => `
+            <div class="project-item">
+              <h3>${project.name}</h3>
+              <p>${project.description}</p>
+              <div class="skill-list" style="margin-top: 8px;">
+                ${project.technologies.map((tech) => `<span class="skill-tag">${tech}</span>`).join("")}
+              </div>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+
+        <div class="section">
+          <h2>Education</h2>
+          ${portfolioData.education
+            .map(
+              (edu) => `
+            <div class="education-item">
+              <h3>${edu.degree}</h3>
+              <p><span class="institution">${edu.institution}</span> - <span class="period">${edu.status}</span></p>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+
+        <div class="section">
+          <h2>Technical Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h4>Programming Languages</h4>
+              <div class="skill-list">
+                ${portfolioData.skills.programming.map((skill) => `<span class="skill-tag">${skill}</span>`).join("")}
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4>Frameworks & Tools</h4>
+              <div class="skill-list">
+                ${portfolioData.skills.frameworks.map((skill) => `<span class="skill-tag">${skill}</span>`).join("")}
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4>Languages</h4>
+              <div class="skill-list">
+                ${portfolioData.skills.languages.map((skill) => `<span class="skill-tag">${skill}</span>`).join("")}
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4>Additional Skills</h4>
+              <div class="skill-list">
+                ${portfolioData.skills.additional.map((skill) => `<span class="skill-tag">${skill}</span>`).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Certifications</h2>
+          <div class="certifications">
+            ${portfolioData.certifications
+              .map(
+                (cert) => `
+              <div class="cert-item">
+                <strong>${cert.name}</strong><br>
+                <span class="period">${cert.year}</span>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Achievements</h2>
+          ${portfolioData.achievements
+            .map(
+              (achievement) => `
+            <div class="achievement">
+              <h4>🏆 ${achievement.title}</h4>
+              <p>${achievement.description}</p>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+      </body>
+      </html>
+    `
+
+    // Open in new tab and trigger print
+    const newWindow = window.open("", "_blank")
+    newWindow.document.write(resumeHTML)
+    newWindow.document.close()
+
+    // Wait for content to load then trigger print dialog
+    newWindow.onload = () => {
+      setTimeout(() => {
+        newWindow.print()
+      }, 500)
+    }
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = navItems.map((item) => item.id)
@@ -143,7 +389,7 @@ export default function Portfolio() {
                     Harsh Kumar
                   </span>
                 </h1>
-                <p className="text-xl text-gray-600 mt-4">Founder of NearBux | Computer Science Student</p>
+                <p className="text-xl text-gray-600 mt-4">CEO & Founder of NearBux | Computer Science Student</p>
               </div>
 
               <p className="text-lg text-gray-700 leading-relaxed">
@@ -160,6 +406,7 @@ export default function Portfolio() {
                   Get In Touch
                 </Button>
                 <Button
+                  onClick={generateResume}
                   variant="outline"
                   className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 text-lg bg-transparent"
                 >
@@ -205,8 +452,8 @@ export default function Portfolio() {
               </CardHeader>
               <CardContent>
                 <p className="text-lg text-gray-700 mb-4">
-                  <strong>Founder of NearBux</strong> - A startup initiative focused on bridging the gap between
-                  businesses and digital engagement.
+                  <strong>CEO & Founder of NearBux</strong> - Transforming Indian local shops into digital businesses
+                  while rewarding customers for every purchase.
                 </p>
                 <p className="text-gray-600">
                   Currently pursuing B.Tech in Computer Science, combining academic excellence with entrepreneurial
@@ -353,8 +600,8 @@ export default function Portfolio() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 mb-4">
-                  A startup initiative focused on bridging the gap between businesses and digital engagement, helping
-                  companies connect better with their audience.
+                  Transforming Indian local shops into digital businesses while rewarding customers for every purchase.
+                  Building the future of local commerce in India.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary">Entrepreneurship</Badge>
